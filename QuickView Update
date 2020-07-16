@@ -1,0 +1,107 @@
+Sub UpdateQV1()
+'
+' UpdateQV1 Makro
+'
+' Beide Datenanfäge ausgewählt und bis nach unten markiert.
+    Sheets("A&S").Select
+    Range("A4:B4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+' Kopiert
+    Selection.Copy
+' QuickView ausgewählt
+    Sheets("QuickView").Select
+
+' Erste Zelle gewählt und die Daten eingefügt
+    Range("A4").Select
+    ActiveSheet.Paste
+    
+    'SUM VK----------------------------------------------
+    Sheets("A&S").Select
+    Range("L4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+
+    Selection.Copy
+
+    Sheets("QuickView").Select
+
+
+    Range("C4").Select
+    ActiveSheet.Paste
+    
+    'SUM EK----------------------------------------------
+    Sheets("A&S").Select
+    Range("R4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+
+    Selection.Copy
+
+    Sheets("QuickView").Select
+
+
+    Range("D4").Select
+    ActiveSheet.Paste
+    
+    'Marge----------------------------------------------
+    Sheets("A&S").Select
+    Range("T4:U4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+
+    Selection.Copy
+
+    Sheets("QuickView").Select
+
+
+    Range("E4").Select
+    ActiveSheet.Paste
+    
+    'Wartung----------------------------------------------
+    Sheets("A&S").Select
+    Range("AB4:AC4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+
+    Selection.Copy
+
+    Sheets("QuickView").Select
+
+
+    Range("G4").Select
+    ActiveSheet.Paste
+    
+    'AR----------------------------------------------
+    Sheets("A&S").Select
+    Range("AY4:AZ4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+
+    Selection.Copy
+
+    Sheets("QuickView").Select
+
+
+    Range("I4").Select
+    ActiveSheet.Paste
+    
+    'LR----------------------------------------------
+    Sheets("A&S").Select
+    Range("BT4").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+
+    Selection.Copy
+
+    Sheets("QuickView").Select
+
+
+    Range("K4").Select
+    ActiveSheet.Paste
+    
+    Response = MsgBox("Fertig aktualisiert, weitermachen!", 0, "Hinweis")
+        If Response = 1 Then
+        
+        End If
+End Sub
