@@ -1,0 +1,61 @@
+Sub QuickViewUpdate()
+
+    MsgBox ("Ok drücken um Aktualiserung im Tab QuickView zu starten")
+        
+    Dim rngAB As Range, rngABpos As Range
+    
+    With Worksheets("A&S")
+        Set rngAB = Range(Cells(4, 1), Cells(Rows.Count, 1).End(xlUp))
+        'Set rngAB = Range(Cells(4, 2), Cells(Rows.Count, 1).End(xlUp))
+        
+        FinalRow = Cells(Rows.Count, 1).End(xlUp).Row
+    End With
+    
+'    Debug.Print "Anz Zeilen AB-Nr: "; rngAB.Rows.Count
+'    Debug.Print "FinalRow:"; FinalRow
+    
+    
+    
+    With Worksheets("QuickView")
+        For i = 2 To FinalRow
+            'Debug.Print Worksheets("A&S").Cells(i, 1).Value
+            'Debug.Print Worksheets("QuickView").Cells(i, 1).Value
+            
+            'Kopieren AB.Nr.
+            Worksheets("QuickView").Cells(i, 1).Value = Worksheets("A&S").Cells(i + 2, 1).Value
+            
+            'Kopieren AB Pos.
+            '!!!Problem mit Komma!!!
+            Worksheets("QuickView").Cells(i, 2).Value = CStr(Worksheets("A&S").Cells(i + 2, 2).Value)
+            
+            'Kopieren SUM VK
+            Worksheets("QuickView").Cells(i, 3).Value = Worksheets("A&S").Cells(i + 2, 12).Value
+            
+            'Kopieren SUM EK
+            Worksheets("QuickView").Cells(i, 4).Value = Worksheets("A&S").Cells(i + 2, 18).Value
+            
+            'Kopieren Marge
+            Worksheets("QuickView").Cells(i, 5).Value = Worksheets("A&S").Cells(i + 2, 20).Value
+            Worksheets("QuickView").Cells(i, 6).Value = Worksheets("A&S").Cells(i + 2, 21).Value
+            
+            'Kopieren Wartung
+            Worksheets("QuickView").Cells(i, 7).Value = Worksheets("A&S").Cells(i + 2, 28).Value
+            Worksheets("QuickView").Cells(i, 8).Value = Worksheets("A&S").Cells(i + 2, 29).Value
+            
+            'Kopieren AR Rechnungen
+            Worksheets("QuickView").Cells(i, 9).Value = Worksheets("A&S").Cells(i + 2, 51).Value
+            Worksheets("QuickView").Cells(i, 10).Value = Worksheets("A&S").Cells(i + 2, 52).Value
+            
+            'Kopieren LR Rechnungen
+            Worksheets("QuickView").Cells(i, 11).Value = Worksheets("A&S").Cells(i + 2, 72).Value
+            
+        Next i
+    'Debug.Print "-----End For i-----"
+
+    End With
+    
+    Response = MsgBox("Fertig aktualisiert, weitermachen!", 0, "Hinweis")
+        If Response = 1 Then
+        
+        End If
+End Sub
