@@ -1,64 +1,44 @@
-Private Sub Worksheet_Change(ByVal Target As Range)
-               
-        Dim rngA As Range, rngJ As Range
-        Dim DlLength As Integer
-        
-        With Worksheets("Tabelle1")
-            Set rngA = .Range(.Cells(2, 1), .Cells(Rows.Count, 1).End(xlUp))
-            Set rngJ = .Range(.Cells(2, 10), .Cells(Rows.Count, 10).End(xlUp))
-        End With
-        
-        'Set rngA = Range("A2:A44")
-        'Set rngJ = Range("J2:J26")
-        
-        Worksheets("Tabelle1").Activate
-        
-'        Debug.Print "Vor For Schleife"
-'        For i = 2 To rngA.Rows.Count
-'
-'            Debug.Print "Zähler i:"; i
-'            'Debug.Print Range("A" & i)
-'
-'            For j = 2 To rngJ.Rows.Count
-'
-'                Debug.Print "Zähler j:"; j
-'                'Debug.Print Range("J" & j)
-'
-'                If StrComp(Range("A" & i).Value, Range("J" & j).Value, 1) = 0 Then
-'                        Range("F" & i).Value = Range("K" & j).Value
-'                        Debug.Print Range("A" & i)
-'                        Debug.Print Range("J" & j)
-'                        Debug.Print Range("K" & j)
-'                        'Debug.Print Range("F" & i)
-'                    Else
-'                        Range("F" & i).Value = "Error"
-'                    End If
-'            Next j
-'        Next i
-        Debug.Print "----------Start----------"
-        'For i = 1 To rngA.Rows.Count
-        For i = 1 To 5
-            Debug.Print "Nice lvl: "; i
+Sub GenzwertKalk()
 
-            'For j = 1 To rngJ.Rows.Count
-'            For j = 1 To rngJ.Rows.Count
-'                Debug.Print "---j: "; j
-'
-'                If StrComp(Range("A" & i).Value, Range("J" & j).Value, 1) = 0 Then
-'                    Range("F" & i).Value = Range("K" & j).Value
-'
-'                Else
-'                    Range("F" & i).Value = "Error"
-'                End If
-'            Next j
-        Next i
-       
-'        If StrComp(Range("A" & i).Value, Range("J" & j).Value, 1) = 0 Then
-'            Range("F" & i).Value = Range("K" & j).Value
-'
-'        Else
-'            Range("F" & i).Value = "Error"
-'        End If
+        Dim FinalRowDL As Integer, FinalRowHelpTab As Integer
+        Dim i As Integer, x As Integer
         
-       
+        
+        'Lokation & Berechnen der länge der DL in der A&S Tab
+        Sheets("Tabelle1").Select
+        Range("A2").Select
+        
+        FinalRowDL = Range(Selection, Selection.End(xlDown)).Rows.Count
+        
+        'Lokation & Berechnen der länge der DL in der Hilfs Tab Tab
+        Sheets("Tabelle1").Select
+        Range("J2").Select
+        
+        FinalRowDLHelpTab = Range(Selection, Selection.End(xlDown)).Rows.Count
+        
+        Debug.Print "FinalRowDL: "; FinalRowDL
+        Debug.Print "FinalRowDLHelp: "; FinalRowDLHelpTab
+        
+        For i = 1 To FinalRowDL
+            Debug.Print "i: "; i
+            
+            For x = 1 To FinalRowDLHelpTab
+                Debug.Print "x: "; x
+                Debug.Print Range("A" & i + 1).Value; ": "; Range("J" & x + 1).Value
+                
+                If StrComp(Range("A" & i + 1).Value, Range("J" & x + 1).Value, 1) = 0 Then
+                    Range("F" & i + 1).Value = Range("K" & x + 1).Value
+                End If
+                
+                If IsEmpty(Range("F" & i + 1).Value) Then
+                    Range("F" & i + 1).Value = "Error, DL nicht vorhanden"
+                    
+                End If
+                
+            Next x
+            
+        Next i
+        
+    
+    
 End Sub
