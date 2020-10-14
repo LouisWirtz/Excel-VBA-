@@ -1,0 +1,75 @@
+Sub Test1()
+'
+' Test1 Makro
+
+    Dim FinalRow As Integer, i As Integer, x As Integer
+    Dim AnzTrueA As Integer, AnzTrueB As Integer, AnzTrueC As Integer
+    
+    Dim AnzBearb As Integer
+    
+    
+    Dim Bearbeiter As String
+    
+    Sheets("Ressourcen").Select
+    AnzBearb = Range("TabErg[[Bearbeiter Kürzel ]]").Rows.Count
+    Debug.Print "Anz Bearbeiter: "; AnzBearb
+    'Lokation & Berechnen der länge der Übersicht
+    Sheets("Übersicht Kunde").Select
+    
+    FinalRow = Range("ÜbersichtKunde[Bearbeiter (A&S)]").Rows.Count
+    Debug.Print "Zeilennummer: "; FinalRow
+    
+    'Schleife um alle Bearbeiter durchzugehen ----------------------------------------------------------------------------------------
+    For x = 1 To AnzBearb
+        Sheets("Ressourcen").Select 'Wechsel in Ressourcen
+        Bearbeiter = Range("A" & x + 1).Value
+        Debug.Print "Bearb: "; Bearbeiter
+        
+        Sheets("Übersicht Kunde").Select ' Wechsel in Übersicht Kunden
+        
+        'Schleife um die Bearbeiter mit den Typen zu vergleichen TYP A ---------------------------------------------------------------
+        For i = 1 To FinalRow
+            If Range("G" & i + 1).Value = Bearbeiter And Range("V" & i + 1).Value = True Then
+            
+                AnzTrueA = AnzTrueA + 1
+            End If
+        
+        Next i
+        
+        'Schleife um die Bearbeiter mit den Typen zu vergleichen TYP B ---------------------------------------------------------------
+        For i = 1 To FinalRow
+            If Range("G" & i + 1).Value = Bearbeiter And Range("W" & i + 1).Value = True Then
+            
+                AnzTrueB = AnzTrueB + 1
+            End If
+        
+        Next i
+        
+        'Schleife um die Bearbeiter mit den Typen zu vergleichen TYP C ---------------------------------------------------------------
+        For i = 1 To FinalRow
+            If Range("G" & i + 1).Value = Bearbeiter And Range("X" & i + 1).Value = True Then
+            
+                AnzTrueC = AnzTrueC + 1
+            End If
+        
+        Next i
+        'Ort des Ergebnis
+        Sheets("Ressourcen").Select 'Wechsel in Ressourcen um AnzTrueABC zu speichern
+'        Range("B2").Select
+        Range("B" & x + 1).Value = AnzTrueA
+        Range("C" & x + 1).Value = AnzTrueB
+        Range("D" & x + 1).Value = AnzTrueC
+        
+        'Zurücksetzen der AnzTrue, sonst werden alle Summiert
+        AnzTrueA = 0
+        AnzTrueB = 0
+        AnzTrueC = 0
+    Next x
+    
+    Debug.Print "AnzTrue: "; AnzTrue
+    
+
+
+
+    
+End Sub
