@@ -1,0 +1,14 @@
+Sub xverweist1()
+'
+' xverweist1 Makro
+'
+
+'Tabelle 32 ist die HilfsTabelle
+'Hier ist die Auswahl wichtig die in der ActiveCell getroffen wird. Das Programm
+'weiß noch nicht
+
+'Auswahl der aktiven Tabelle an der Spalte [Wert Marge]
+    Range(ActiveCell.ListObject.Name & "[Wert Marge]").Formula2R1C1 = _
+        "=XLOOKUP([@Wartungsart],Tabelle32[Wartungsart],Tabelle32[Wartung in % ],""Nicht eingetragen"")"
+    Range("H3").Select
+End Sub
